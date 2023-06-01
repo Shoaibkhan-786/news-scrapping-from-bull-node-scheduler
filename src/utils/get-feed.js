@@ -2,7 +2,8 @@ const validUrl = require("valid-url");
 const cheerio = require("cheerio");
 const axios = require("axios");
 const feedModel = require('../models/feed');
-const Selector = require('../channel-selectors/selector');
+const Selector = require('../channel-selectors');
+
 
 
 
@@ -13,13 +14,13 @@ const fetchHtml = async (channel) => {
 
         let elements;
         const { channelName } = channel;
-    
+
         if (channelName in Selector) elements = $(Selector[channelName]["feedSelector"]).toArray();
 
         return { elements, $, channelName };
     }
-    catch (err) {
-        // console.log(err)
+    catch (error) {
+        console.log(error)
     }
 }
 

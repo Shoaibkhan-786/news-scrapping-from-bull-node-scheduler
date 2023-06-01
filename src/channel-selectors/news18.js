@@ -1,8 +1,8 @@
 const { contentSelector, feedSelector } = require('../utils/content-selector');
 
-exports.ndtvindia = {
-    feedSelector: '.rss_list li',
-    newsSelector: '.ins_storybody p',
+exports.news18 = {
+    feedSelector: ".subjective_things li",
+    newsSelector: ".article-content-box p",
     getFeedData: feedSelector,
     getNewsContent: contentSelector
 }

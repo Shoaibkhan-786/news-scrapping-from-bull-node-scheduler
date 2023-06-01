@@ -1,3 +1,5 @@
+const { contentSelector } = require('../utils/content-selector');
+
 exports.abpnews = {
     feedSelector: '.rsstablerow',
     newsSelector: '.uk-text-break p , .video_content p, .news_content p',
@@ -6,11 +8,5 @@ exports.abpnews = {
         const feedName = $(element).find('td').eq(0).text();
         return { feedLink, feedName }
     },
-    getNewsContent: async function (page) {
-        const content = await page.evaluate(function (selector) {
-            return document.querySelector(selector)?.textContent
-        }, this.newsSelector)
-
-        return content
-    }
+    getNewsContent: contentSelector
 }

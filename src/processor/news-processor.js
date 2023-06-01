@@ -1,14 +1,15 @@
 const { Browser } = require('../services/puppeteer-services');
 const newsModel = require('../models/news');
-const  Selector  = require('../channel-selectors/selector');
+const  Selector  = require('../channel-selectors');
 
 exports.newsProcessor = async (job, done) => {
     try {
         const { link, title, channelName, feedId, channelId, published, description } = job.data;
         const browserInstance = await Browser.getInstance();
+        
 
         const page = await browserInstance.newPage()
-
+        
         await page.goto(link, { timeout: 0, waitUntil: 'networkidle0' })
 
         const longDescription = await Selector[channelName].getNewsContent(page);
@@ -24,6 +25,7 @@ exports.newsProcessor = async (job, done) => {
         await page.close()
         done()
     } catch (error) {
+        console.log('------second--------')
         console.log(error)
     }
 }
